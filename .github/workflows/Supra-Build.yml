@@ -51,6 +51,16 @@ jobs:
           seconds=$((duration % 60))
           echo "BUILD_DURATION=${minutes} minutes and ${seconds} seconds." >> $GITHUB_ENV
 
+      - name: Get KernelSU Version
+        id: ksu_version
+        run: |
+          if [ -d "KernelSU" ]; then
+            KSU_VERSION=$(cd KernelSU && git describe --abbrev=0 --tags)
+          else
+            KSU_VERSION="Desconhecida"
+          fi
+          echo "KSU_VERSION=$KSU_VERSION" >> $GITHUB_ENV
+
       - name: Set Device Name
         id: device_name
         run: |
@@ -71,3 +81,4 @@ jobs:
           message: |
              New version of Supra-Kernel for device ${{ env.DEVICE_NAME }} available!
              Build time: ${{ env.BUILD_DURATION }}
+             KernelSU Version: ${{ env.KSU_VERSION }}
