@@ -2,7 +2,7 @@ name: Supra-Kernel
 on:
   workflow_dispatch:
     branches:
-      - Supra-4.9.337
+      - Supra-4.9.337-KSU
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,6 +42,16 @@ jobs:
           seconds=$((duration % 60))
           echo "BUILD_DURATION=${minutes} minutos e ${seconds} segundos." >> $GITHUB_ENV
 
+      - name: Get KernelSU Version
+        id: ksu_version
+        run: |
+          if [ -d "KernelSU" ]; then
+            KSU_VERSION=$(cd KernelSU && git describe --abbrev=0 --tags)
+          else
+            KSU_VERSION="Desconhecida"
+          fi
+          echo "KSU_VERSION=$KSU_VERSION" >> $GITHUB_ENV
+
       - name: Git variables
         run: |
           HEAD="$(git rev-parse HEAD)"
@@ -57,6 +67,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           document: Supra-channel*.zip
           message: |
-             Nova versão do Supra-Kernel disponível!
-             Tempo de build: ${{ env.BUILD_DURATION }}
-             Último commit: ${{ env.COMMIT_POINT }}
+             🛠️ Nova versão do Supra-Kernel disponível!
+             ⏳ Tempo de build: ${{ env.BUILD_DURATION }}
+             🔗 Último commit: ${{ env.COMMIT_POINT }}
+             🏷️ KernelSU Version: ${{ env.KSU_VERSION }}
