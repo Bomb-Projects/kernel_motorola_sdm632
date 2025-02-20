@@ -21,7 +21,7 @@ else
     done
 fi
 
-ZIPNAME="Supra-${DEVICE}-KSU-$(date '+%Y%m%d-%H%M').zip"
+ZIPNAME="Supra-${DEVICE}-KSU-NEXT-$(date '+%Y%m%d-%H%M').zip"
 TC_DIR="$(pwd)/tc/clang-r522817"
 AK3_DIR="$(pwd)/android/AnyKernel3"
 DEFCONFIG="${DEVICE}_defconfig"
@@ -61,7 +61,7 @@ if [[ $ARGUMENT = "-c" || $ARGUMENT = "--clean" ]]; then
     rm -rf out
 fi
 
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
+curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 
 mkdir -p out
 make O=out ARCH=arm64 $DEFCONFIG
