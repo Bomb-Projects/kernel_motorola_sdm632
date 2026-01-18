@@ -4,7 +4,7 @@
 # Copyright (C) 2020-2024 Adithya R. and Contributors
 
 SECONDS=0 # builtin bash timer
-SUPPORTED_DEVICES=(channel ocean river)
+SUPPORTED_DEVICES=(channel ocean river sanders)
 
 if [[ " ${SUPPORTED_DEVICES[@]} " =~ " $1 " ]]; then
     DEVICE=$1

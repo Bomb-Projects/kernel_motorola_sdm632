@@ -1,7 +1,4 @@
 ifeq ($(CONFIG_MMI_DEVICE_DTBS),y)
-ifneq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
-	$(error Pippen DT w/o overlay is undefined!!!)
-endif
 
 # Add 1k of padding to the DTBs to allow for environment variables
 # to be runtime added by the bootloader (i.e. /chosen properties)
@@ -753,6 +750,13 @@ dtb-$(CONFIG_ARCH_SDM450) += sdm450-ali-dvt1b.dtb
 dtb-$(CONFIG_ARCH_SDM450) += sdm450-ali-dvt2.dtb
 dtb-$(CONFIG_ARCH_SDM450) += sdm450-ali-pvt1.dtb
 dtb-$(CONFIG_ARCH_SDM450) += sdm450-ali-pvt2.dtb
+endif
+
+ifeq ($(CONFIG_SANDERS_DTB),y)
+dtb-$(CONFIG_ARCH_SDM450) += msm8953-sanders-p1.dtb
+dtb-$(CONFIG_ARCH_SDM450) += msm8953-sanders-p2.dtb
+dtb-$(CONFIG_ARCH_SDM450) += msm8953-sanders-p3.dtb
+dtb-$(CONFIG_ARCH_SDM450) += msm8953-sanders-p4.dtb
 endif
 
 dtb-$(CONFIG_ARCH_SDM632) += sdm632-rumi.dtb \
